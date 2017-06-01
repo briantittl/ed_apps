@@ -1,0 +1,101 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Bingo Game</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<style>
+			table {
+				width:90%;
+				margin-left:5%;
+				border-collapse: collapse;
+				border: 1px solid black;
+				table-layout: fixed;
+			}
+			tr {
+				height:140px;
+			}
+			td { 
+				height:140px; 
+				border: 1px solid black;
+			}
+			.space {
+				font-size:24px;
+				text-align:center;
+			}
+		</style>
+	</head>
+	<body>
+		<table>
+			<tr><td colspan="5" style="font-size:90px; text-align:center;">BINGO</td></tr>
+			<tr>
+				<td class="space"></td>
+				<td class="space"></td>
+				<td class="space"></td>
+				<td class="space"></td>
+				<td class="space"></td>
+			</tr>
+			<tr>
+				<td class="space"></td>
+				<td class="space"></td>
+				<td class="space"></td>
+				<td class="space"></td>
+				<td class="space"></td>
+			</tr>
+			<tr>
+				<td class="space"></td>
+				<td class="space"></td>
+				<td class="space active" style="font-size:24px; text-align:center; background-color:yellow;">FREE SPACE</td>
+				<td class="space"></td>
+				<td class="space"></td>
+			</tr>
+			<tr>
+				<td class="space"></td>
+				<td class="space"></td>
+				<td class="space"></td>
+				<td class="space"></td>
+				<td class="space"></td>
+			</tr>
+			<tr>
+				<td class="space"></td>
+				<td class="space"></td>
+				<td class="space"></td>
+				<td class="space"></td>
+				<td class="space"></td>
+			</tr>
+		</table>
+	</body>
+	<script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="crossorigin="anonymous"></script>
+	<script>
+		(function($) {
+			var terms = ["allow","aim","active","capture","swift","clasp","rare","cling","avoid","chill","meek","woe","arch","stunt","formal","merit","lame","boast","ripple","grave","yearn","valid","unite","endure","patient","coward"];
+			
+			var j, x, i;
+			for (i = terms.length; i; i--) {
+				j = Math.floor(Math.random() * i);
+				x = terms[i - 1];
+				terms[i - 1] = terms[j];
+				terms[j] = x;
+			}
+			
+			var counter=0;
+			$(".space").each(function(){
+				if (!$(this).hasClass("active")){
+					$(this).html(terms[counter]);
+					counter += 1;
+				}
+			})
+
+			$(".space").on("click", function(){
+				if ($(this).hasClass("active")){
+					$(this).css("background-color","white");
+					$(this).removeClass("active");
+				}
+				else {
+					$(this).css("background-color","yellow");
+					$(this).addClass("active");
+				}
+			})
+		})(jQuery);
+	</script>
+</html>
